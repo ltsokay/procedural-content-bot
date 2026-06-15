@@ -1,17 +1,17 @@
 """
-MapGenerator — генератор карт.
+MapGenerator — генератор карт
 
-Идея (как и описано в курсовой): для каждой клетки карты считаем значение
+Идея: для каждой клетки карты считаем значение
 шума Перлина, а затем по пороговым значениям превращаем число в тип
 поверхности (вода / равнина / лес / горы). Названия поверхностей зависят
-от выбранной темы (fantasy, sci-fi, post-apocalyptic).
+от выбранной темы (fantasy, sci-fi, post-apocalyptic)
 """
 
 import random
 
 from generators.perlin import pnoise2
 
-# Базовые "категории" рельефа -> как они называются в каждой теме.
+#Базовые "категории" рельефа -> как они называются в каждой теме
 TILE_THEMES = {
     "fantasy": {
         "water": "water",
@@ -33,7 +33,7 @@ TILE_THEMES = {
     },
 }
 
-# Плотность опасных зон (врагов) в зависимости от сложности.
+#Плотность опасных зон (врагов) в зависимости от сложности
 ENEMY_DENSITY = {
     "easy": 0.05,
     "hard": 0.15,
@@ -41,13 +41,13 @@ ENEMY_DENSITY = {
 
 
 class MapGenerator:
-    """Строит двумерную карту тайлов и матрицу опасных зон."""
+    """Строит двумерную карту тайлов и матрицу опасных зон"""
 
     def generate(self, size: int, theme: str, difficulty: str, scale: float = 10.0) -> dict:
         names = TILE_THEMES.get(theme, TILE_THEMES["fantasy"])
         density = ENEMY_DENSITY.get(difficulty, 0.05)
 
-        # Случайный сдвиг, чтобы каждая генерация давала новую карту.
+        #Случайный сдвиг, чтобы каждая генерация давала новую карту
         offset_x = random.uniform(0, 1000)
         offset_y = random.uniform(0, 1000)
 
@@ -66,7 +66,7 @@ class MapGenerator:
                     row.append(names["forest"])
                 else:
                     row.append(names["mountain"])
-                # Враг может появиться только не на воде.
+                #Враг может появиться только не на воде
                 is_enemy = row[-1] != names["water"] and random.random() < density
                 enemy_row.append(1 if is_enemy else 0)
             tiles.append(row)
@@ -82,7 +82,7 @@ class MapGenerator:
         }
 
     def preview(self, result: dict) -> str:
-        """Короткое текстовое превью карты символами (для отправки в чат)."""
+        """Короткое текстовое превью карты символами (для отправки в чат)"""
         symbols = {
             "water": "~", "coolant": "~", "toxic_pool": "~",
             "plain": ".", "platform": ".", "wasteland": ".",
