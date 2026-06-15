@@ -1,4 +1,4 @@
-# Генератор процедурного контента — Telegram-бот
+# Генератор процедурного контента - Telegram-бот
 
 Telegram-бот, который генерирует игровые **карты**, **лут** (предметы) и **имена персонажей**
 с учётом темы и сложности, и экспортирует результат в **JSON** и **XML**
@@ -9,14 +9,14 @@ Telegram-бот, который генерирует игровые **карты
 
 | Файл | Что делает | В курсовой |
 |------|------------|-----------|
-| `procedural_content_bot.py` | Точка входа. Принимает команды и нажатия кнопок, хранит состояние, отправляет ответы. | класс `ProceduralBot`, раздел 3.2 |
-| `session.py` | `UserSession` — параметры одного пользователя и его последний результат. | `UserSession`, раздел 3.2 |
-| `content_service.py` | `ContentService` — по типу контента вызывает нужный генератор. | `ContentService`, раздел 3.2 |
-| `generators/map_generator.py` | `MapGenerator` — карта на шуме Перлина. | раздел 2.3 / 3.3 |
-| `generators/loot_generator.py` | `LootGenerator` — лут по словарям и таблицам редкости. | раздел 2.3 / 3.3 |
-| `generators/name_generator.py` | `NameGenerator` — имена на марковской цепи. | раздел 2.3 / 3.3 |
-| `generators/perlin.py` | Шум Перлина (с запасной реализацией, если нет библиотеки `noise`). | раздел 2.3 |
-| `export_service.py` | `ExportService` — сериализация в JSON и XML. | `ExportService`, раздел 3.4 |
+| `procedural_content_bot.py` | Точка входа. Принимает команды и нажатия кнопок, хранит состояние, отправляет ответы | класс `ProceduralBot`, раздел 3.2 |
+| `session.py` | `UserSession` — параметры одного пользователя и его последний результат | `UserSession`, раздел 3.2 |
+| `content_service.py` | `ContentService` — по типу контента вызывает нужный генератор | `ContentService`, раздел 3.2 |
+| `generators/map_generator.py` | `MapGenerator` — карта на шуме Перлина | раздел 2.3 / 3.3 |
+| `generators/loot_generator.py` | `LootGenerator` — лут по словарям и таблицам редкости | раздел 2.3 / 3.3 |
+| `generators/name_generator.py` | `NameGenerator` — имена на марковской цепи | раздел 2.3 / 3.3 |
+| `generators/perlin.py` | Шум Перлина (с запасной реализацией, если нет библиотеки `noise`) | раздел 2.3 |
+| `export_service.py` | `ExportService` — сериализация в JSON и XML | `ExportService`, раздел 3.4 |
 
 Архитектура повторяет диаграмму классов из курсовой (Рисунок 8): интерфейс (бот) →
 управление состоянием (`UserSession`) → координатор (`ContentService`) → генераторы → экспорт
