@@ -1,13 +1,13 @@
 """
-Модульные тесты ядра бота (генераторы, сервисы, состояние, экспорт).
+Модульные тесты ядра бота (генераторы, сервисы, состояние, экспорт)
 
 Запуск:
-    python -m unittest discover -s tests        # без зависимостей (stdlib)
+    python -m unittest discover -s tests        #Без зависимостей (stdlib)
 или, если установлен pytest / coverage:
     coverage run -m pytest && coverage report
 
 Тесты не затрагивают сетевой слой Telegram — проверяется бизнес-логика
-генерации, маршрутизации и сериализации.
+генерации, маршрутизации и сериализации
 """
 
 import json
@@ -35,7 +35,7 @@ class TestUserSession(unittest.TestCase):
     def test_last_result_is_independent(self):
         a, b = UserSession(), UserSession()
         a.last_result["x"] = 1
-        self.assertEqual(b.last_result, {})  # у каждого свой словарь
+        self.assertEqual(b.last_result, {})  #У каждого свой словарь
 
 
 class TestPerlin(unittest.TestCase):
@@ -98,7 +98,7 @@ class TestLootGenerator(unittest.TestCase):
             self.assertIn(item["rarity"], BASE_POWER)
             self.assertGreaterEqual(item["power"], BASE_POWER[item["rarity"]])
             self.assertLessEqual(item["power"], BASE_POWER[item["rarity"]] + 10)
-            self.assertEqual(len(item["name"].split()), 2)  # префикс + предмет
+            self.assertEqual(len(item["name"].split()), 2)  #Префикс + предмет
 
     def test_easy_has_no_legendary(self):
         rarities = {self.g.generate("fantasy", "easy")["item"]["rarity"] for _ in range(200)}
@@ -177,7 +177,7 @@ class TestExportService(unittest.TestCase):
 
     def test_xml_handles_nested_map(self):
         r = self.cs.generate(UserSession(content_type="map", size=5))
-        root = ET.fromstring(self.ex.to_xml(r))  # вложенные списки не должны падать
+        root = ET.fromstring(self.ex.to_xml(r))  #Вложенные списки не должны падать
         self.assertIsNotNone(root.find("map"))
 
 
